@@ -1,0 +1,40 @@
+extends layout
+block content
+    html
+        head
+            title #{name}
+            link(rel='stylesheet', href='/css/style.css')
+            meta(name="viewport" content="width=device-width, initial-scale=1")
+    body
+        .main.container
+        .row
+        .col-md-6.col-md-offset-3
+            h1.display-4.m-b-2 Add courses
+            form(method='POST' action='/course/register')
+                div.form-group
+                    label(for='course') Courses
+                    select.form-control(type='text' id='course' placeholder='course' name='course')
+                        option(value='0', selected= true) -- Select --
+                        -for(i in nonReg)
+                            option  #{nonReg[i].course}
+                    button.btn.btn-primary(type='submit') Register course
+        .container
+            h4 Registered Courses
+            -for(i in regCourses)
+                .card
+                    .card-header
+                        h1 Course: #{regCourses[i].course}
+                    .card-body
+                        h4 Faculty: #{regCourses[i].teacher}
+                        h4 Credit: #{regCourses[i].credit}
+                        h4 Branch: #{regCourses[i].branch}
+        .container
+            h4 Other Courses
+            -for(i in nonReg)
+                .card
+                    .card-header
+                        h1 Course: #{nonReg[i].course}
+                    .card-body
+                        h4 Faculty: #{nonReg[i].faculty}
+                        h4 Credits: #{nonReg[i].credits}
+                        h4 Branch: #{nonReg[i].branch}
